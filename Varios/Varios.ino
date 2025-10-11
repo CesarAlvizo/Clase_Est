@@ -1,3 +1,10 @@
+/*
+ * Fecha: 10/10/2025
+ * Descripción: 
+ * Envía un mensaje en código Morse con la señal SOS, luego hace parpadear el LED 7 veces,  
+ * repite el SOS, y finalmente realiza un efecto de fade (encendido y apagado gradual) también 7 veces.
+ */
+
 void setup() {
   pinMode(LED_BUILTIN, OUTPUT);
 }
@@ -73,5 +80,6 @@ void fadeOnce() {
     delay(2); 
   }
 }
+
 
 
