@@ -1,5 +1,4 @@
 /*
- * Autor: César Isaac Alvizo Esquivel
  * Fecha: 10/10/2025
  * Descripción: 
  * Implementa el mensaje de auxilio internacional "SOS" ( ...---... ) 
