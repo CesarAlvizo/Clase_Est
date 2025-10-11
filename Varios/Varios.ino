@@ -3,10 +3,10 @@ void setup() {
 }
 
 void loop() {
-  // 1. SOS
+  // 1. Prende el led haciendo mensaje: SOS
   sendSOS();
 
-  // 2. Blink 7 
+  // 2. Blink 7 veces
   for (int i = 0; i < 7; i++) {
     digitalWrite(LED_BUILTIN, HIGH); // Prender LED
     delay(500);
@@ -14,29 +14,29 @@ void loop() {
     delay(500);
   }
 
-  // 3. SOS
+  // 3. Prende el led haciendo mensaje: SOS
   sendSOS();
 
-  // 4. Pulse (fade) 7
-  for (int i = 0; i < 7; i++) {
-    fadeOnce();
+  // 4. Pulse (fade) 7 veces
+  for (int i = 0; i < 7; i++) { // Loop de 0 a 6 (7 veces)
+    fadeOnce(); // Llamada a la funcion fade
   }
   delay(2000);
 }
 
 // Funcion para punto en Morse
 void dot() {
-  digitalWrite(LED_BUILTIN, HIGH);
+  digitalWrite(LED_BUILTIN, HIGH); // Prender Led
   delay(200);
-  digitalWrite(LED_BUILTIN, LOW);
+  digitalWrite(LED_BUILTIN, LOW);// Apagar LED
   delay(200);
 }
 
 // Funcion para linea en Morse
 void dash() {
-  digitalWrite(LED_BUILTIN, HIGH);
+  digitalWrite(LED_BUILTIN, HIGH); // Prender Led
   delay(600);
-  digitalWrite(LED_BUILTIN, LOW);
+  digitalWrite(LED_BUILTIN, LOW); // Apagar LED
   delay(200);
 }
 
@@ -52,7 +52,7 @@ void sendO() {
 
 // Funcion que manda SOS utilizando las funciones dot() y dash()
 void sendSOS() {
-  sendS();
+  sendS(); 
   delay(500); 
   sendO();
   delay(500); 
@@ -64,13 +64,14 @@ void sendSOS() {
 void fadeOnce() {
   // Fade in
   for (int brightness = 0; brightness <= 255; brightness++) {
-    analogWrite(LED_BUILTIN, brightness);
+    analogWrite(LED_BUILTIN, brightness); // hace fade de apagado hasta prendido
     delay(2); // 0–255 
   }
   // Fade out
   for (int brightness = 255; brightness >= 0; brightness--) {
-    analogWrite(LED_BUILTIN, brightness);
+    analogWrite(LED_BUILTIN, brightness); // hace fade de prendido a apagado
     delay(2); 
   }
 }
+
 
