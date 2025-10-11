@@ -8,9 +8,9 @@ void loop() {
 
   // 2. Blink 7 
   for (int i = 0; i < 7; i++) {
-    digitalWrite(LED_BUILTIN, HIGH);
+    digitalWrite(LED_BUILTIN, HIGH); // Prender LED
     delay(500);
-    digitalWrite(LED_BUILTIN, LOW);
+    digitalWrite(LED_BUILTIN, LOW); // Apagar LED
     delay(500);
   }
 
@@ -19,12 +19,12 @@ void loop() {
 
   // 4. Pulse (fade) 7
   for (int i = 0; i < 7; i++) {
-    fadeOnce();  // fade in and out once (~1 sec)
+    fadeOnce();
   }
-
   delay(2000);
 }
 
+// Funcion para punto en Morse
 void dot() {
   digitalWrite(LED_BUILTIN, HIGH);
   delay(200);
@@ -32,6 +32,7 @@ void dot() {
   delay(200);
 }
 
+// Funcion para linea en Morse
 void dash() {
   digitalWrite(LED_BUILTIN, HIGH);
   delay(600);
@@ -39,14 +40,17 @@ void dash() {
   delay(200);
 }
 
+// Funcion que manda S utilizando las funciones dot() y dash()
 void sendS() {
   dot(); dot(); dot();
 }
 
+// Funcion que manda O utilizando las funciones dot() y dash()
 void sendO() {
   dash(); dash(); dash();
 }
 
+// Funcion que manda SOS utilizando las funciones dot() y dash()
 void sendSOS() {
   sendS();
   delay(500); 
@@ -66,6 +70,7 @@ void fadeOnce() {
   // Fade out
   for (int brightness = 255; brightness >= 0; brightness--) {
     analogWrite(LED_BUILTIN, brightness);
-    delay(2); // 
+    delay(2); 
   }
 }
+
