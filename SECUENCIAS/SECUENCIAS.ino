@@ -1,85 +1,59 @@
-// --- Constants ---
-const int ledPin = 13; // The number of the LED pin (built-in)
+const int ledPin = 13; // Pin del LED integrado en el Arduino Mega
 
-// --- Setup ---
-// Runs once at the start
 void setup() {
-  // initialize the LED pin as an output:
-  pinMode(ledPin, OUTPUT);
+  pinMode(ledPin, OUTPUT); // Configura el pin como salida
 }
 
-// --- Main Loop ---
-// Runs over and over, one pattern after the other
 void loop() {
+  runSOS();         // Reproduce la señal SOS (...---...)
   
-  // 1. Play the SOS pattern once
-  runSOS();
-  
-  // (The SOS function already includes a long pause at the end)
-
-  // 2. Play the Blink pattern 7 times
   for (int i = 0; i < 7; i++) {
-    runBlink();
+    runBlink();     // Parpadea 7 veces
   }
   
-  // Pause for 1 second before starting the next pattern
   delay(1000); 
   
-  // 3. Play the Pulse pattern once
-  runPulse();
-  
-  // (The Pulse function ends with the LED off)
-  
-  // Pause for 1 second before the whole loop repeats
+  runPulse();       // Efecto de brillo gradual
   delay(1000); 
 }
 
-// --- Helper Functions for Patterns ---
-
-// 1. runSOS()
-// Plays the ...---... pattern
+// Señal SOS (...---...)
 void runSOS() {
-  int dot = 200; // duration for a "dot"
-  int dash = 600; // duration for a "dash"
-  int pause = 200; // pause between dots/dashes
+  int dot = 200;
+  int dash = 600;
+  int pause = 200;
   
   // S (...)
   digitalWrite(ledPin, HIGH); delay(dot); digitalWrite(ledPin, LOW); delay(pause);
   digitalWrite(ledPin, HIGH); delay(dot); digitalWrite(ledPin, LOW); delay(pause);
-  digitalWrite(ledPin, HIGH); delay(dot); digitalWrite(ledPin, LOW); delay(pause * 2); // pause between letters
+  digitalWrite(ledPin, HIGH); delay(dot); digitalWrite(ledPin, LOW); delay(pause * 2);
 
   // O (---)
   digitalWrite(ledPin, HIGH); delay(dash); digitalWrite(ledPin, LOW); delay(pause);
   digitalWrite(ledPin, HIGH); delay(dash); digitalWrite(ledPin, LOW); delay(pause);
-  digitalWrite(ledPin, HIGH); delay(dash); digitalWrite(ledPin, LOW); delay(pause * 2); // pause between letters
+  digitalWrite(ledPin, HIGH); delay(dash); digitalWrite(ledPin, LOW); delay(pause * 2);
 
   // S (...)
   digitalWrite(ledPin, HIGH); delay(dot); digitalWrite(ledPin, LOW); delay(pause);
   digitalWrite(ledPin, HIGH); delay(dot); digitalWrite(ledPin, LOW); delay(pause);
-  digitalWrite(ledPin, HIGH); delay(dot); digitalWrite(ledPin, LOW); delay(pause * 4); // longer pause at end
+  digitalWrite(ledPin, HIGH); delay(dot); digitalWrite(ledPin, LOW); delay(pause * 4);
 }
 
-
-// 2. runBlink()
-// Simple on-off blink (one full cycle)
+// Parpadeo simple
 void runBlink() {
   digitalWrite(ledPin, HIGH);
-  delay(500); // On for half a second
+  delay(500);
   digitalWrite(ledPin, LOW);
-  delay(500); // Off for half a second
+  delay(500);
 }
 
-
-// 3. runPulse()
-// Fades the LED in and out using PWM
+// Brillo gradual (fade)
 void runPulse() {
-  // Fade in
   for (int fadeValue = 0; fadeValue <= 255; fadeValue += 5) {
     analogWrite(ledPin, fadeValue);
-    delay(30); // small delay to make the fade smooth
+    delay(30);
   }
 
-  // Fade out
   for (int fadeValue = 255; fadeValue >= 0; fadeValue -= 5) {
     analogWrite(ledPin, fadeValue);
     delay(30);
