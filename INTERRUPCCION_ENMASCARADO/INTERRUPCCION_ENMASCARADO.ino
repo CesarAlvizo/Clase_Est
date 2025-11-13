@@ -1,11 +1,9 @@
-// --- Constantes de Pines ---
 const int ledPin = 13;       // el pin del LED
 const int buttonPin1 = 44;   // SOS
 const int buttonPin2 = 46;   // Blink
 const int buttonPin3 = 47;   // Pulse
 const int buttonPin4 = 45;   // Botón de INTERRUPCIÓN
 
-// --- Setup ---
 void setup() {
   pinMode(ledPin, OUTPUT);
   pinMode(buttonPin1, INPUT_PULLUP);
@@ -14,7 +12,6 @@ void setup() {
   pinMode(buttonPin4, INPUT_PULLUP); // El botón de interrupción
 }
 
-// --- Loop Principal ---
 void loop() {
   // El botón 45 (interrupción) se revisa DENTRO de las funciones de patrones.
   
@@ -40,8 +37,6 @@ void loop() {
   }
 }
 
-// --- Nueva Función de Delay ---
-
 /**
  * @brief Hace una pausa similar a delay(), pero revisa el botón de interrupción.
  * @param ms El tiempo en milisegundos para la pausa.
@@ -52,30 +47,26 @@ bool delayInterruptible(unsigned long ms) {
   while (millis() - start < ms) {
     // Revisar constantemente el botón de interrupción
     if (digitalRead(buttonPin4) == LOW) {
-      return true; // ¡Interrumpido!
+      return true; // Interrumpir
     }
-    // Pequeña pausa para que el procesador respire
     delay(1); 
   }
   return false; // Pausa completada sin interrupción
 }
 
 
-// --- Funciones de Patrones Modificadas ---
 
 // 1. runSOS()
 void runSOS() {
   int dot = 200; int dash = 600; int pause = 200;
-  
-  // Cada 'delay()' se reemplaza con 'if (delayInterruptible(...)) return;'
-  
+    
   // S (...)
   digitalWrite(ledPin, HIGH); if (delayInterruptible(dot)) return;
   digitalWrite(ledPin, LOW);  if (delayInterruptible(pause)) return;
   digitalWrite(ledPin, HIGH); if (delayInterruptible(dot)) return;
   digitalWrite(ledPin, LOW);  if (delayInterruptible(pause)) return;
   digitalWrite(ledPin, HIGH); if (delayInterruptible(dot)) return;
-  digitalWrite(ledPin, LOW);  if (delayInterruptible(pause * 2)) return; // Pausa letra
+  digitalWrite(ledPin, LOW);  if (delayInterruptible(pause * 2)) return;
 
   // O (---)
   digitalWrite(ledPin, HIGH); if (delayInterruptible(dash)) return;
@@ -83,7 +74,7 @@ void runSOS() {
   digitalWrite(ledPin, HIGH); if (delayInterruptible(dash)) return;
   digitalWrite(ledPin, LOW);  if (delayInterruptible(pause)) return;
   digitalWrite(ledPin, HIGH); if (delayInterruptible(dash)) return;
-  digitalWrite(ledPin, LOW);  if (delayInterruptible(pause * 2)) return; // Pausa letra
+  digitalWrite(ledPin, LOW);  if (delayInterruptible(pause * 2)) return; 
 
   // S (...)
   digitalWrite(ledPin, HIGH); if (delayInterruptible(dot)) return;
@@ -91,7 +82,7 @@ void runSOS() {
   digitalWrite(ledPin, HIGH); if (delayInterruptible(dot)) return;
   digitalWrite(ledPin, LOW);  if (delayInterruptible(pause)) return;
   digitalWrite(ledPin, HIGH); if (delayInterruptible(dot)) return;
-  digitalWrite(ledPin, LOW);  if (delayInterruptible(pause * 4)) return; // Pausa larga
+  digitalWrite(ledPin, LOW);  if (delayInterruptible(pause * 4)) return;
 }
 
 
@@ -122,3 +113,4 @@ void runPulse() {
     if (delayInterruptible(30)) return; // Revisar en cada paso del fade
   }
 }
+
